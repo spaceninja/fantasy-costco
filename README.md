@@ -1,2 +1,3 @@
-# fantasy-costco
+# Fantasy Costco
+
 Magic shop inventory generator
