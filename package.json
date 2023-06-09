@@ -1,7 +1,9 @@
 {
   "name": "fantasy-costco",
   "version": "1.0.0",
+  "author": "Scott Vandehey",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "run-p type build:vite",
