@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { userSession, handleLogout } from '../../composables/useAuth';
+import { userSession, handleLogout } from '@/composables/useAuth';
 </script>
 
 <style lang="scss">

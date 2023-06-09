@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
-import App from '@/App.vue';
-import { firebaseApp } from '@/lib/firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { firebaseApp } from '@/utils/firebase';
 import { userSession } from '@/composables/useAuth';
-import './assets/main.scss';
+import App from '@/App.vue';
+import '@/assets/main.scss';
 
 createApp(App).mount('#app');
 
