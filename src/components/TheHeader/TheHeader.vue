@@ -1,10 +1,12 @@
 <template>
-  <h1>Fantasy Costco</h1>
-  <nav>
-    <button v-if="userSession" type="button" @click="handleLogout">
-      Sign Out
-    </button>
-  </nav>
+  <header>
+    <h1>Fantasy Costco</h1>
+    <nav>
+      <button v-if="userSession" type="button" @click="handleLogout">
+        Sign Out
+      </button>
+    </nav>
+  </header>
 </template>
 
 <script setup lang="ts">

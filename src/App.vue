@@ -1,7 +1,7 @@
 <template>
   <TheHeader />
   <AuthForm v-if="userSession === null" />
-  <template v-else>Logged in, yo!</template>
+  <TheShop v-else />
   <TheFooter />
 </template>
 
@@ -9,5 +9,6 @@
 import { userSession } from '@/composables/useAuth';
 import TheHeader from '@/components/TheHeader/TheHeader.vue';
 import AuthForm from '@/components/AuthForm/AuthForm.vue';
+import TheShop from '@/components/TheShop/TheShop.vue';
 import TheFooter from '@/components/TheFooter/TheFooter.vue';
 </script>
