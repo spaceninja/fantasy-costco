@@ -12,11 +12,31 @@ import { userSession } from './useAuth';
 interface Item {
   id: string;
   name: string;
+  category: string;
+  categoryNotes?: string;
+  rarity: string;
+  description: string;
+  source?: string;
+  restrictions?: string;
+  attunement: boolean;
+  stocked: boolean;
+  purchased: boolean;
+  gachapon: boolean;
 }
 
 const emptyItem: Item = {
   id: '',
   name: '',
+  category: '',
+  categoryNotes: '',
+  rarity: '',
+  description: '',
+  source: '',
+  restrictions: '',
+  attunement: false,
+  stocked: false,
+  purchased: false,
+  gachapon: false,
 };
 
 // Get a reference to the database service
@@ -52,8 +72,6 @@ export const enterAddBookMode = () => {
  * Enter "Edit Book" Mode
  *
  * Passes the given book to the Edit Book form and shows it.
- *
- * @param {Object} book
  */
 export const enterEditBookMode = (book: Item) => {
   console.log('ENTER EDIT BOOK MODE', book);

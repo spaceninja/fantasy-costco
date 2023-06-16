@@ -1,9 +1,13 @@
 header {
+  align-items: center;
   border-bottom: 1px solid currentcolor;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1em;
   padding-bottom: 1em;
 }
 
 h1 {
   color: hotpink;
+  margin: 0;
 }

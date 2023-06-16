@@ -1,0 +1,11 @@
+.is-purchased {
+  text-decoration: line-through;
+}
+
+.is-stocked {
+  font-weight: bold;
+}
+
+.is-gachapon::before {
+  content: '🔮 ';
+}
