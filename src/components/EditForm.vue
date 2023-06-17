@@ -116,7 +116,3 @@ import {
   exitEditMode,
 } from '@/composables/useItem';
 </script>
-
-<style lang="scss">
-@import './EditForm';
-</style>

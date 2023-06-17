@@ -1,3 +1,8 @@
+@use 'header';
+@use 'forms';
+@use 'shop';
+@use 'footer';
+
 html {
   color-scheme: dark light;
 }

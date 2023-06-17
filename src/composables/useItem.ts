@@ -1,4 +1,5 @@
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { shuffle } from '@/utils/shuffle';
 import { firebaseApp } from '@/utils/firebase';
 import {
   getDatabase,
@@ -8,21 +9,7 @@ import {
   onValue,
 } from 'firebase/database';
 import { userSession } from './useAuth';
-
-interface Item {
-  id: string;
-  name: string;
-  category: string;
-  categoryNotes?: string;
-  rarity: string;
-  description: string;
-  source?: string;
-  restrictions?: string;
-  attunement: boolean;
-  stocked: boolean;
-  purchased: boolean;
-  gachapon: boolean;
-}
+import { type Item } from '@/types/Item';
 
 const emptyItem: Item = {
   id: '',
@@ -51,6 +38,111 @@ export const currentItem = ref(emptyItem);
 export const isLoading = ref(true);
 export const editMode = ref<null | string>(null);
 export const unloadDbListener = ref(() => {});
+
+/**
+ * COMPUTED REFERENCES ---------------------------------------------------------
+ */
+
+export const purchasedItems = computed(() => {
+  return allItems.value.filter((item) => item.purchased === true);
+});
+
+export const unpurchasedItems = computed(() => {
+  return allItems.value.filter((item) => item.purchased === false);
+});
+
+// Unpurchased by rarity
+
+export const commonItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.rarity === 'common');
+});
+
+export const uncommonItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.rarity === 'uncommon');
+});
+
+export const rareItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.rarity === 'rare');
+});
+
+export const veryRareItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.rarity === 'very-rare');
+});
+
+export const legendaryItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.rarity === 'legendary');
+});
+
+// Gachapon items
+
+export const gachaponItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.gachapon === true);
+});
+
+export const stockedGachaponItems = computed(() => {
+  return gachaponItems.value.filter((item) => item.stocked === true);
+});
+
+export const unstockedGachaponItems = computed(() => {
+  return gachaponItems.value.filter((item) => item.stocked === false);
+});
+
+// Front Room items
+
+export const frontRoomItems = computed(() => {
+  return unpurchasedItems.value.filter((item) => item.gachapon === false);
+});
+
+export const stockedFrontRoomItems = computed(() => {
+  return frontRoomItems.value.filter((item) => item.stocked === true);
+});
+
+export const unstockedFrontRoomItems = computed(() => {
+  return frontRoomItems.value.filter((item) => item.stocked === false);
+});
+
+/**
+ * HELPER METHODS --------------------------------------------------------------
+ */
+
+/**
+ * Get Random Gachapon Items
+ *
+ * Stocks the gachapon machine with 20 random items, first getting any "stocked"
+ * items, then filling the rest with random unpurchased gachapon items.
+ */
+export const getRandomGachaponItems = () => {
+  const remainingSlots = 20 - stockedGachaponItems.value.length;
+  const shuffledGachaponItems = shuffle(unstockedGachaponItems.value);
+  return [
+    ...shuffledGachaponItems.slice(0, remainingSlots),
+    ...stockedGachaponItems.value,
+  ];
+};
+
+/**
+ * Get Random Front Room Items By Rarity
+ *
+ * Stocks the front room with a number of random items, first getting any "stocked"
+ * items, then filling the rest with unpurchased items of the given rarity.
+ */
+export const getRandomFrontRoomItemsByRarity = (
+  rarity: string,
+  count: number
+) => {
+  const stocked = stockedFrontRoomItems.value.filter((item) => {
+    console.log(rarity, item.rarity, item.rarity === rarity);
+    return item.rarity === rarity;
+  });
+  const unstocked = unstockedFrontRoomItems.value.filter(
+    (item) => item.rarity === rarity
+  );
+  const remainingSlots = count - stocked.length;
+  const shuffled = shuffle(unstocked);
+  return [...shuffled.slice(0, remainingSlots), ...stocked].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+};
 
 /**
  * EDIT MODE METHODS -----------------------------------------------------------

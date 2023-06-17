@@ -1,0 +1,39 @@
+.app-header {
+  align-items: center;
+  border-bottom: 1px solid currentcolor;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+
+.logo {
+  color: hotpink;
+  margin: 0;
+}
+
+.app-nav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav__item + .app-nav__item {
+  margin-left: 1em;
+}
+
+.app-nav__link {
+  background: none;
+  border: none;
+  color: currentcolor;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav__link[aria-current='true'] {
+  color: hotpink;
+  font-weight: bold;
+}
