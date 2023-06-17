@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3>Front Room</h3>
-    <ol v-if="frontRoomItems.length">
+    <ol v-if="currentFrontRoomItems.length">
       <li
-        v-for="item in frontRoomItems"
+        v-for="item in currentFrontRoomItems"
         :key="item.id"
         :class="[
           { 'is-purchased': item.purchased },
@@ -14,36 +14,17 @@
       </li>
     </ol>
     <p v-else>Sorry, we have nothing in stock!</p>
-    <button type="button" @click="restock">Spin</button>
+    <button type="button" @click="getRandomFrontRoomItems()">Restock</button>
+    <button type="button" @click="saveFrontRoomItems(currentFrontRoomItems)">
+      Save
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { getRandomFrontRoomItemsByRarity } from '@/composables/useItem';
-import { type Item } from '@/types/Item';
-
-const commonItems = ref<Item[]>([]);
-const uncommonItems = ref<Item[]>([]);
-const rareItems = ref<Item[]>([]);
-const veryRareItems = ref<Item[]>([]);
-const legendaryItems = ref<Item[]>([]);
-
-const frontRoomItems = computed(() => {
-  return [
-    ...commonItems.value,
-    ...uncommonItems.value,
-    ...rareItems.value,
-    ...veryRareItems.value,
-    ...legendaryItems.value,
-  ];
-});
-
-const restock = () => {
-  commonItems.value = getRandomFrontRoomItemsByRarity('common', 6);
-  uncommonItems.value = getRandomFrontRoomItemsByRarity('uncommon', 6);
-  rareItems.value = getRandomFrontRoomItemsByRarity('rare', 4);
-  veryRareItems.value = getRandomFrontRoomItemsByRarity('very-rare', 2);
-  legendaryItems.value = getRandomFrontRoomItemsByRarity('legendary', 1);
-};
+import {
+  currentFrontRoomItems,
+  getRandomFrontRoomItems,
+  saveFrontRoomItems,
+} from '@/composables/useItem';
 </script>

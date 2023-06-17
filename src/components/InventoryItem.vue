@@ -24,14 +24,14 @@
       <button @click="showConfirm">⛔️</button>
     </td>
     <td>
-      <button @click="enterEditBookMode(item)">✏️</button>
+      <button @click="enterEditItemMode(item)">✏️</button>
     </td>
   </tr>
 </template>
 
 <script setup lang="ts">
 import { type Item } from '@/types/Item';
-import { deleteItem, enterEditBookMode } from '@/composables/useItem';
+import { deleteItem, enterEditItemMode } from '@/composables/useItem';
 
 const props = defineProps<{
   item: Item;

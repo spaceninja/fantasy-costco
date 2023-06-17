@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" @click="enterAddBookMode">Add Item</button>
+    <button type="button" @click="enterAddItemMode">Add Item</button>
     <table v-if="allItems.length">
       <thead>
         <tr>
@@ -22,5 +22,5 @@
 
 <script setup lang="ts">
 import InventoryItem from '@/components/InventoryItem.vue';
-import { allItems, enterAddBookMode } from '@/composables/useItem';
+import { allItems, enterAddItemMode } from '@/composables/useItem';
 </script>

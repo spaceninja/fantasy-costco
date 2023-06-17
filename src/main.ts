@@ -2,7 +2,14 @@ import { createApp } from 'vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { firebaseApp } from '@/utils/firebase';
 import { userSession } from '@/composables/useAuth';
-import { loadUserItems, unloadUserItems } from './composables/useItem';
+import {
+  loadFrontRoomItems,
+  loadGachaponItems,
+  loadUserItems,
+  unloadFrontRoomItems,
+  unloadGachaponItems,
+  unloadUserItems,
+} from './composables/useItem';
 import App from '@/App.vue';
 import '@/assets/main.scss';
 
@@ -19,10 +26,14 @@ onAuthStateChanged(auth, (user) => {
     userSession.value = user;
     console.log('AUTH STATE CHANGE: LOGGED IN', userSession.value);
     loadUserItems(user.uid);
+    loadGachaponItems(user.uid);
+    loadFrontRoomItems(user.uid);
   } else {
     // User is signed out
     userSession.value = null;
     console.log('AUTH STATE CHANGE: LOGGED OUT', userSession.value);
     unloadUserItems();
+    unloadGachaponItems();
+    unloadFrontRoomItems();
   }
 });

@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3>Gachapon</h3>
-    <ol v-if="gachaponItems.length">
+    <ol v-if="currentGachaponItems.length">
       <li
-        v-for="item in gachaponItems"
+        v-for="item in currentGachaponItems"
         :key="item.id"
         :class="[
           { 'is-purchased': item.purchased },
@@ -14,16 +14,17 @@
       </li>
     </ol>
     <p v-else>Sorry, we have nothing in stock!</p>
-    <button type="button" @click="gachaponItems = getRandomGachaponItems()">
-      Spin
+    <button type="button" @click="getRandomGachaponItems()">Restock</button>
+    <button type="button" @click="saveGachaponItems(currentGachaponItems)">
+      Save
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { getRandomGachaponItems } from '@/composables/useItem';
-import { type Item } from '@/types/Item';
-
-const gachaponItems = ref<Item[]>([]);
+import {
+  currentGachaponItems,
+  getRandomGachaponItems,
+  saveGachaponItems,
+} from '@/composables/useItem';
 </script>
