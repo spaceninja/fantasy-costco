@@ -25,14 +25,12 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in
     userSession.value = user;
-    console.log('AUTH STATE CHANGE: LOGGED IN', userSession.value);
     loadUserItems(user.uid);
     loadGachaponItems(user.uid);
     loadFrontRoomItems(user.uid);
   } else {
     // User is signed out
     userSession.value = null;
-    console.log('AUTH STATE CHANGE: LOGGED OUT', userSession.value);
     unloadUserItems();
     unloadGachaponItems();
     unloadFrontRoomItems();

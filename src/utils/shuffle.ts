@@ -1,5 +1,6 @@
 /**
  * Fisher-Yates shuffle algorithm
+ *
  * @see https://javascript.info/task/shuffle
  */
 export const shuffle = (array: any[]) => {

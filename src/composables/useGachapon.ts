@@ -13,7 +13,7 @@ const database = getDatabase(firebaseApp);
  * REACTIVE REFERENCES ---------------------------------------------------------
  */
 
-export const isLoadingGachapon = ref(true);
+export const isLoadingGachapon = ref(false);
 export const currentGachaponItems = ref<Item[]>([]);
 export const unloadGachaponListener = ref(() => {});
 
@@ -61,9 +61,10 @@ export const getRandomGachaponItems = () => {
  * Fetch Gachapon Items
  *
  * Retreive the current set of Gachapon items and watch for changes
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const loadGachaponItems = async (uid: string) => {
-  console.log('FETCH GACHAPON ITEMS', uid);
   try {
     isLoadingGachapon.value = true;
     // create a database reference
@@ -77,7 +78,6 @@ export const loadGachaponItems = async (uid: string) => {
       data = data.isArray ? data : Object.values(data);
       // save the items from database (or an empty array) to app state
       currentGachaponItems.value = data;
-      console.log('GACHAPON ITEMS REF CHANGE', currentGachaponItems.value);
     });
   } catch (error) {
     console.error(error);
@@ -90,9 +90,10 @@ export const loadGachaponItems = async (uid: string) => {
  * Unload Gachapon Items
  *
  * Remove all Gachapon items from state and remove listener
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const unloadGachaponItems = async () => {
-  console.log('UNLOAD GACHAPON ITEMS');
   // remove listener
   unloadGachaponListener.value();
   // reset state
@@ -104,9 +105,10 @@ export const unloadGachaponItems = async () => {
  * Save Gachapon Items
  *
  * Save the current Gachapon items to the database
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const saveGachaponItems = async (items: Item[]) => {
-  console.log('SAVE GACHAPON ITEMS', items);
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');

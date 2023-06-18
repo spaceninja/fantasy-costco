@@ -13,7 +13,7 @@ const database = getDatabase(firebaseApp);
  * REACTIVE REFERENCES ---------------------------------------------------------
  */
 
-export const isLoadingFrontRoom = ref(true);
+export const isLoadingFrontRoom = ref(false);
 export const currentFrontRoomItems = ref<Item[]>([]);
 export const unloadFrontRoomListener = ref(() => {});
 
@@ -47,10 +47,9 @@ export const getRandomFrontRoomItemsByRarity = (
   rarity: string,
   count: number
 ) => {
-  const stocked = stockedFrontRoomItems.value.filter((item) => {
-    console.log(rarity, item.rarity, item.rarity === rarity);
-    return item.rarity === rarity;
-  });
+  const stocked = stockedFrontRoomItems.value.filter(
+    (item) => item.rarity === rarity
+  );
   const unstocked = unstockedFrontRoomItems.value.filter(
     (item) => item.rarity === rarity
   );
@@ -91,9 +90,10 @@ export const getRandomFrontRoomItems = () => {
  * Fetch Front Room Items
  *
  * Retreive the current set of Front Room items and watch for changes
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const loadFrontRoomItems = async (uid: string) => {
-  console.log('FETCH FRONT ROOM ITEMS', uid);
   try {
     isLoadingFrontRoom.value = true;
     // create a database reference
@@ -107,7 +107,6 @@ export const loadFrontRoomItems = async (uid: string) => {
       data = data.isArray ? data : Object.values(data);
       // save the items from database (or an empty array) to app state
       currentFrontRoomItems.value = data;
-      console.log('FRONT ROOM ITEMS REF CHANGE', currentFrontRoomItems.value);
     });
   } catch (error) {
     console.error(error);
@@ -120,9 +119,10 @@ export const loadFrontRoomItems = async (uid: string) => {
  * Unload Front Room Items
  *
  * Remove all Front Room items from state and remove listener
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const unloadFrontRoomItems = async () => {
-  console.log('UNLOAD FRONT ROOM ITEMS');
   // remove listener
   unloadFrontRoomListener.value();
   // reset state
@@ -134,9 +134,10 @@ export const unloadFrontRoomItems = async () => {
  * Save Front Room Items
  *
  * Save the current Front Room items to the database
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const saveFrontRoomItems = async (items: Item[]) => {
-  console.log('SAVE FRONT ROOM ITEMS', items);
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');

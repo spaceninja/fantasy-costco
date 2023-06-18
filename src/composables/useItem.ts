@@ -34,7 +34,7 @@ const database = getDatabase(firebaseApp);
 
 export const allItems = ref<Item[]>([]);
 export const currentItem = ref(emptyItem);
-export const isLoading = ref(true);
+export const isLoading = ref(false);
 export const editMode = ref<null | string>(null);
 export const unloadDbListener = ref(() => {});
 
@@ -83,7 +83,6 @@ export const legendaryItems = computed(() => {
  * Passes an empty item to the Edit Item form and shows it.
  */
 export const enterAddItemMode = () => {
-  console.log('ENTER ADD ITEM MODE');
   currentItem.value = { ...emptyItem };
   editMode.value = 'add';
 };
@@ -94,7 +93,6 @@ export const enterAddItemMode = () => {
  * Passes the given item to the Edit Item form and shows it.
  */
 export const enterEditItemMode = (item: Item) => {
-  console.log('ENTER EDIT ITEM MODE', item);
   currentItem.value = { ...item };
   editMode.value = 'edit';
 };
@@ -105,7 +103,6 @@ export const enterEditItemMode = (item: Item) => {
  * Resets the Edit Item form and hides it.
  */
 export const exitEditMode = () => {
-  console.log('EXIT EDIT MODE');
   currentItem.value = { ...emptyItem };
   editMode.value = null;
 };
@@ -120,10 +117,9 @@ export const exitEditMode = () => {
  *
  * Retreive all items for the signed in user and watch for changes
  *
- * @see https://firebase.google.com/docs/reference/js/database#onvalue
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const loadUserItems = async (uid: string) => {
-  console.log('FETCH ITEMS', uid);
   try {
     isLoading.value = true;
     // create a database reference
@@ -137,7 +133,6 @@ export const loadUserItems = async (uid: string) => {
       data = data.isArray ? data : Object.values(data);
       // save the items from database (or an empty array) to app state
       allItems.value = data;
-      console.log('ITEMS REF CHANGE', allItems.value);
     });
   } catch (error) {
     console.error(error);
@@ -151,10 +146,9 @@ export const loadUserItems = async (uid: string) => {
  *
  * Remove all items from state and remove listener
  *
- * @see https://firebase.google.com/docs/reference/js/database#onvalue
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const unloadUserItems = async () => {
-  console.log('UNLOAD ITEMS');
   // remove listener
   unloadDbListener.value();
   // reset state
@@ -170,7 +164,6 @@ export const unloadUserItems = async () => {
  * @see https://firebase.google.com/docs/reference/js/database#push
  */
 export const addItem = async (item: Item) => {
-  console.log('ADD ITEM', item);
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');
@@ -196,10 +189,9 @@ export const addItem = async (item: Item) => {
  *
  * Targets a specific item via its id and updates it.
  *
- * @see https://firebase.google.com/docs/reference/js/database#set
+ * @see https://firebase.google.com/docs/database/web/lists-of-data
  */
 export const editItem = async (item: Item) => {
-  console.log('EDIT ITEM', item);
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');
@@ -220,9 +212,10 @@ export const editItem = async (item: Item) => {
  * Delete Item
  *
  * Deletes an item via its id
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
  */
 export const deleteItem = async (deletedItemId: string) => {
-  console.log('DELETE ITEM', deletedItemId);
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');

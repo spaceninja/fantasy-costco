@@ -14,14 +14,17 @@
       </li>
     </ol>
     <p v-else>Sorry, we have nothing in stock!</p>
-    <button type="button" @click="getRandomFrontRoomItems()">Restock</button>
-    <button type="button" @click="saveFrontRoomItems(currentFrontRoomItems)">
-      Save
-    </button>
+    <div v-if="userSession">
+      <button type="button" @click="getRandomFrontRoomItems()">Restock</button>
+      <button type="button" @click="saveFrontRoomItems(currentFrontRoomItems)">
+        Save
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { userSession } from '@/composables/useAuth';
 import {
   currentFrontRoomItems,
   getRandomFrontRoomItems,
