@@ -42,11 +42,15 @@ import {
   rareItems,
   veryRareItems,
   legendaryItems,
+} from '@/composables/useItem';
+import {
   gachaponItems,
   unstockedGachaponItems,
   stockedGachaponItems,
+} from '@/composables/useGachapon';
+import {
   frontRoomItems,
   stockedFrontRoomItems,
   unstockedFrontRoomItems,
-} from '@/composables/useItem';
+} from '@/composables/useFrontRoom';
 </script>

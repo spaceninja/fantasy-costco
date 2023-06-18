@@ -26,5 +26,5 @@ import {
   currentFrontRoomItems,
   getRandomFrontRoomItems,
   saveFrontRoomItems,
-} from '@/composables/useItem';
+} from '@/composables/useFrontRoom';
 </script>

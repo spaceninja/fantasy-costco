@@ -26,5 +26,5 @@ import {
   currentGachaponItems,
   getRandomGachaponItems,
   saveGachaponItems,
-} from '@/composables/useItem';
+} from '@/composables/useGachapon';
 </script>

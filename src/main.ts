@@ -2,14 +2,15 @@ import { createApp } from 'vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { firebaseApp } from '@/utils/firebase';
 import { userSession } from '@/composables/useAuth';
+import { loadUserItems, unloadUserItems } from './composables/useItem';
+import {
+  loadGachaponItems,
+  unloadGachaponItems,
+} from './composables/useGachapon';
 import {
   loadFrontRoomItems,
-  loadGachaponItems,
-  loadUserItems,
   unloadFrontRoomItems,
-  unloadGachaponItems,
-  unloadUserItems,
-} from './composables/useItem';
+} from './composables/useFrontRoom';
 import App from '@/App.vue';
 import '@/assets/main.scss';
 
