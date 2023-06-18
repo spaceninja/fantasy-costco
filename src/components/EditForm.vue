@@ -27,12 +27,17 @@
         </select>
       </div>
       <div class="form__group">
-        <label for="item-category-notes">Category Notes</label>
+        <label for="item-category-notes">Category notes</label>
         <input
           id="item-category-notes"
           v-model="currentItem.categoryNotes"
           type="text"
+          placeholder="e.g. sword"
         />
+        <small class="form__help">
+          Anything you put here will be displayed in parentheses after the
+          category. Useful to specify the type of armor or weapon.
+        </small>
       </div>
       <div class="form__group">
         <label for="item-rarity">Rarity</label>
@@ -59,15 +64,22 @@
           v-model="currentItem.attunement"
           type="checkbox"
         />
-        <label for="item-attunement">Requires Attunement?</label>
+        <label for="item-attunement">Requires attunement?</label>
       </div>
       <div class="form__group">
-        <label for="item-restrictions">Attunement Restrictions</label>
+        <label for="item-restrictions">Attunement restrictions</label>
         <input
           id="item-restrictions"
           v-model="currentItem.restrictions"
           type="text"
+          placeholder="e.g., a spellcaster"
         />
+        <small class="form__help">
+          If the item requires attunement by a certain class, you can specify
+          that here, and it will be added. For example, if you write "a
+          spellcaster", then the displayed text will be "requires attunement by
+          a spellcaster."
+        </small>
       </div>
       <div class="form__group">
         <input
@@ -75,7 +87,11 @@
           v-model="currentItem.stocked"
           type="checkbox"
         />
-        <label for="item-stocked">In Stock?</label>
+        <label for="item-stocked">In stock?</label>
+        <small class="form__help">
+          Mark an item as stocked to force it to be included in the shop or
+          gachapon machine.
+        </small>
       </div>
       <div class="form__group">
         <input
@@ -84,6 +100,10 @@
           type="checkbox"
         />
         <label for="item-purchased">Purchased?</label>
+        <small class="form__help">
+          Once an item has been purchased, it will not be displayed in the shop
+          or selected for the gachapon machine.
+        </small>
       </div>
       <div class="form__group">
         <input
@@ -91,11 +111,18 @@
           v-model="currentItem.gachapon"
           type="checkbox"
         />
-        <label for="item-gachapon">Add to Gachapon?</label>
+        <label for="item-gachapon">Add to gachapon machine?</label>
+        <small class="form__help">
+          Items added to the gachapon machine will not be displayed in the shop.
+        </small>
       </div>
       <div class="form__group">
         <label for="item-source">Source</label>
         <input id="item-source" v-model="currentItem.source" type="url" />
+        <small class="form__help">
+          The original URL for this item, if available. Links to D&D Beyond will
+          be marked as "official," and all others will be marked as "homebrew."
+        </small>
       </div>
       <div class="form__group">
         <button type="submit">

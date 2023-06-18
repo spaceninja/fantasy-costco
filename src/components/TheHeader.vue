@@ -1,6 +1,6 @@
 <template>
   <header class="app-header">
-    <h1 class="logo">Fantasy Costco</h1>
+    <h1 class="logo">{{ settings?.shopName || 'Fantasy Costco' }}</h1>
     <nav class="app-nav">
       <ul class="app-nav__list">
         <template v-if="userSession">
@@ -35,6 +35,16 @@
             </button>
           </li>
           <li class="app-nav__item">
+            <button
+              class="app-nav__link"
+              type="button"
+              :aria-current="currentPage === 'settings'"
+              @click="changeCurrentPage('settings')"
+            >
+              Settings
+            </button>
+          </li>
+          <li class="app-nav__item">
             <button class="app-nav__link" type="button" @click="handleLogout">
               Sign Out
             </button>
@@ -57,4 +67,5 @@ import {
   handleLogout,
 } from '@/composables/useAuth';
 import { currentPage, changeCurrentPage } from '@/composables/useNav';
+import { settings } from '@/composables/useSettings';
 </script>

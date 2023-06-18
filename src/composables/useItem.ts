@@ -140,7 +140,7 @@ export const friendlyCategory = (category: string) => {
 /**
  * Fetch All Items
  *
- * Retreive all items for the signed in user and watch for changes
+ * Retrieve all items for the signed in user and watch for changes
  *
  * @see https://firebase.google.com/docs/database/web/read-and-write
  */

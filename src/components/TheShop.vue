@@ -4,6 +4,7 @@
     <TheFrontRoom v-show="currentPage === 'frontroom'" />
     <TheGachapon v-show="currentPage === 'gachapon'" />
     <TheStockroom v-show="currentPage === 'stockroom'" />
+    <TheSettings v-show="currentPage === 'settings'" />
   </template>
 </template>
 
@@ -12,6 +13,7 @@ import EditForm from '@/components/EditForm.vue';
 import TheFrontRoom from '@/components/pages/TheFrontRoom.vue';
 import TheGachapon from '@/components/pages/TheGachapon.vue';
 import TheStockroom from '@/components/pages/TheStockroom.vue';
+import TheSettings from '@/components/pages/TheSettings.vue';
 import { editMode } from '@/composables/useItem';
 import { currentPage } from '@/composables/useNav';
 </script>

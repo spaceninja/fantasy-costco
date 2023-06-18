@@ -1,5 +1,11 @@
 .form__group {
-  margin: 0.5em;
+  margin: 1em 0;
+}
+
+.form__help {
+  margin-top: 0.5em;
+  display: block;
+  opacity: 0.75;
 }
 
 input[type='text'],

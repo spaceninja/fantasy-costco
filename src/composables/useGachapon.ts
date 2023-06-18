@@ -65,7 +65,7 @@ export const getRandomGachaponItems = () => {
 /**
  * Fetch Gachapon Items
  *
- * Retreive the current set of Gachapon items and watch for changes
+ * Retrieve the current set of Gachapon items and watch for changes
  *
  * @see https://firebase.google.com/docs/database/web/read-and-write
  */

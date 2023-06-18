@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>Front Room</h3>
     <template v-if="currentFrontRoomItems.length">
       <ItemDetail
         v-for="item in currentFrontRoomItems"

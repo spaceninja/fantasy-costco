@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { firebaseApp } from '@/utils/firebase';
 import { userSession } from '@/composables/useAuth';
+import { loadSettings, unloadSettings } from './composables/useSettings';
 import { loadUserItems, unloadUserItems } from './composables/useItem';
 import {
   loadGachaponItems,
@@ -25,12 +26,14 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in
     userSession.value = user;
+    loadSettings(user.uid);
     loadUserItems(user.uid);
     loadGachaponItems(user.uid);
     loadFrontRoomItems(user.uid);
   } else {
     // User is signed out
     userSession.value = null;
+    unloadSettings();
     unloadUserItems();
     unloadGachaponItems();
     unloadFrontRoomItems();

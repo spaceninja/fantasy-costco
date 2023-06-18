@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>Gachapon</h3>
     <ol v-if="currentGachaponItems.length">
       <li
         v-for="item in currentGachaponItems"

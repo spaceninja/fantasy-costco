@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { firebaseApp } from '@/utils/firebase';
 import { getDatabase, ref as dbRef, get } from 'firebase/database';
 import { currentFrontRoomItems } from '@/composables/useFrontRoom';
+import { settings, emptySettings } from '@/composables/useSettings';
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
@@ -19,9 +20,34 @@ export const isLoadingPublic = ref(false);
  */
 
 /**
- * Fetch All Items
+ * Fetch Settings
  *
- * Retreive all items for the signed in user and watch for changes
+ * Retrieve the settings for the specified shop
+ *
+ * @see https://firebase.google.com/docs/database/web/read-and-write
+ */
+export const loadPublicSettings = async (uid: string) => {
+  // Remapping from `cosmic-curiosities` to Scott's store
+  if (uid === 'cosmic-curiosities') uid = 'tFvAoymzLaTMdSwSgPTBXgP8ukp1';
+  try {
+    // create a database reference
+    const settingsRef = dbRef(database, `stores/${uid}/settings`);
+    // read data from the database once
+    await get(settingsRef).then((snapshot) => {
+      let data = snapshot.val();
+      if (data === null) data = emptySettings;
+      // save the settings from database to app state
+      settings.value = data;
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * Fetch Front Room Items
+ *
+ * Retrieve all front room items for the specified shop
  *
  * @see https://firebase.google.com/docs/database/web/read-and-write
  */

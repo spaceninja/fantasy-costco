@@ -2,16 +2,18 @@
   <article>
     <h2>{{ item.name }}</h2>
     <p>
-      {{ friendlyCategory(item.category)
-      }}<span v-if="item.categoryNotes" class="lowercase">
-        ({{ item.categoryNotes }})</span
-      >,
-      {{ friendlyRarity(item.rarity) }}
-      <span v-if="item.attunement">
-        (requires attunement<span v-if="item.restrictions" class="lowercase">
-          by {{ item.restrictions }}</span
-        >)
-      </span>
+      <em>
+        {{ friendlyCategory(item.category)
+        }}<span v-if="item.categoryNotes" class="lowercase">
+          ({{ item.categoryNotes }})</span
+        >,
+        {{ friendlyRarity(item.rarity) }}
+        <span v-if="item.attunement">
+          (requires attunement<span v-if="item.restrictions" class="lowercase">
+            by {{ item.restrictions }}</span
+          >)
+        </span>
+      </em>
     </p>
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="htmlDescription" />
