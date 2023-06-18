@@ -133,6 +133,28 @@ export const friendlyCategory = (category: string) => {
 };
 
 /**
+ * Get Price By Rarity
+ *
+ * Returns a price based on the given rarity.
+ */
+export const getPriceByRarity = (rarity: string) => {
+  switch (rarity) {
+    case 'common':
+      return '50';
+    case 'uncommon':
+      return '250';
+    case 'rare':
+      return '3,000';
+    case 'very-rare':
+      return '40,000';
+    case 'legendary':
+      return '200,000';
+    default:
+      return 0;
+  }
+};
+
+/**
  * API METHODS -----------------------------------------------------------------
  * These functions talk to the third-party APIs like Firebase.
  */

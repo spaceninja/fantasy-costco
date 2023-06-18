@@ -1,6 +1,6 @@
 <template>
   <article>
-    <h2>{{ item.name }}</h2>
+    <h2>{{ item.name }}, {{ price }}gp</h2>
     <p>
       <em>
         {{ friendlyCategory(item.category)
@@ -29,7 +29,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { marked } from 'marked';
-import { friendlyCategory, friendlyRarity } from '@/composables/useItem';
+import {
+  friendlyCategory,
+  friendlyRarity,
+  getPriceByRarity,
+} from '@/composables/useItem';
 import { type Item } from '@/types/Item';
 
 const props = defineProps<{
@@ -44,4 +48,6 @@ const htmlDescription = computed(() =>
 );
 
 const isOfficial = computed(() => props.item.source?.includes('dndbeyond.com'));
+
+const price = computed(() => getPriceByRarity(props.item.rarity));
 </script>
