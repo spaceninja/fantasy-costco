@@ -9,6 +9,7 @@ import {
 } from 'firebase/database';
 import { userSession } from './useAuth';
 import { type Item } from '@/types/Item';
+import { capitalize } from '@/utils/capitalize';
 
 const emptyItem: Item = {
   id: '',
@@ -33,7 +34,7 @@ const database = getDatabase(firebaseApp);
  */
 
 export const allItems = ref<Item[]>([]);
-export const currentItem = ref(emptyItem);
+export const currentItem = ref<Item>(emptyItem);
 export const isLoading = ref(false);
 export const editMode = ref<null | string>(null);
 export const unloadDbListener = ref(() => {});
@@ -105,6 +106,30 @@ export const enterEditItemMode = (item: Item) => {
 export const exitEditMode = () => {
   currentItem.value = { ...emptyItem };
   editMode.value = null;
+};
+
+/**
+ * HELPER METHODS --------------------------------------------------------------
+ */
+
+/**
+ * Friendly Rarity
+ *
+ * Returns a human-friendly version of a rarity value.
+ */
+export const friendlyRarity = (rarity: string) => {
+  if (rarity === 'very-rare') return 'very rare';
+  return rarity;
+};
+
+/**
+ * Friendly Category
+ *
+ * Returns a human-friendly version of a category value.
+ */
+export const friendlyCategory = (category: string) => {
+  if (category === 'wonderous') return 'Wonderous item';
+  return capitalize(category);
 };
 
 /**

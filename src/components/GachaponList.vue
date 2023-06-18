@@ -10,7 +10,9 @@
           { 'is-stocked': item.stocked },
         ]"
       >
-        {{ item.name }}
+        <button type="button" @click="setCurrentGachaponItem(item)">
+          {{ item.name }}
+        </button>
       </li>
     </ol>
     <p v-else>Sorry, we have nothing in stock!</p>
@@ -18,13 +20,21 @@
     <button type="button" @click="saveGachaponItems(currentGachaponItems)">
       Save
     </button>
+    <ItemDetail
+      v-if="currentGachaponItem"
+      :key="currentGachaponItem.id"
+      :item="currentGachaponItem"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import ItemDetail from '@/components/ItemDetail.vue';
 import {
   currentGachaponItems,
+  currentGachaponItem,
   getRandomGachaponItems,
   saveGachaponItems,
+  setCurrentGachaponItem,
 } from '@/composables/useGachapon';
 </script>

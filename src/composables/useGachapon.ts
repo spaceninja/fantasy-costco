@@ -15,6 +15,7 @@ const database = getDatabase(firebaseApp);
 
 export const isLoadingGachapon = ref(false);
 export const currentGachaponItems = ref<Item[]>([]);
+export const currentGachaponItem = ref<Item | null>(null);
 export const unloadGachaponListener = ref(() => {});
 
 /**
@@ -36,6 +37,10 @@ export const unstockedGachaponItems = computed(() => {
 /**
  * HELPER METHODS --------------------------------------------------------------
  */
+
+export const setCurrentGachaponItem = (item: Item) => {
+  currentGachaponItem.value = item;
+};
 
 /**
  * Get Random Gachapon Items
