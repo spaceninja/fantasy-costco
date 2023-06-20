@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <InventoryStats />
-    <InventoryList />
+  <div class="inventory">
+    <InventoryStats class="inventory__stats" />
+    <InventoryList class="inventory__list" />
   </div>
 </template>
 

@@ -1,5 +1,43 @@
-.app-footer {
-  border-top: 1px solid currentcolor;
-  margin-top: 1em;
-  padding-top: 1em;
+.footer {
+  background: var(--color-footer-bg, black);
+  color: var(--color-footer-fg, white);
+  flex: none;
+  line-height: var(--line-height-s);
+  margin-top: calc(var(--size-xl) * 3);
+
+  a {
+    color: var(--color-footer-link, inherit);
+
+    &:hover,
+    &:focus {
+      text-decoration-color: none;
+    }
+  }
+}
+
+.footer-content {
+  align-items: center;
+  display: flex;
+  margin-inline: auto;
+  max-width: var(--size-page-width);
+  padding: var(--size-xxl) var(--size-s);
+}
+
+.footer-logo {
+  flex: 0 0 auto;
+  margin-left: var(--size-l);
+
+  img {
+    display: block;
+  }
+}
+
+.footer-copyright {
+  flex: 1;
+  font-family: var(--font-condensed);
+  font-size: var(--font-size-xs);
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }

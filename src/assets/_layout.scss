@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* stylelint-disable-next-line selector-max-id */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.primary-content {
+  flex: 1;
+  line-height: var(--line-height-xl);
+  margin-inline: auto;
+  max-width: var(--size-page-width);
+  padding-block: var(--size-m);
+  padding-inline: var(--size-s);
+  width: 100%;
+}

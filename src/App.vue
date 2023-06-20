@@ -1,8 +1,10 @@
 <template>
   <TheHeader />
-  <ThePublicShop v-if="storeId" :store-id="storeId" />
-  <TheShop v-else-if="userSession" />
-  <TheClosedSign v-else />
+  <main class="primary-content">
+    <ThePublicShop v-if="storeId" :store-id="storeId" />
+    <TheShop v-else-if="userSession" />
+    <TheClosedSign v-else />
+  </main>
   <TheFooter />
 </template>
 

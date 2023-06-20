@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <FrontRoomList />
-  </div>
+  <FrontRoomList />
 </template>
 
 <script setup lang="ts">

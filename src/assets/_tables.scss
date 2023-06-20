@@ -1,0 +1,79 @@
+table {
+  background: var(--color-table-bg, white);
+  border: var(--border-thin) solid var(--color-table-border, lightgrey);
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: var(--size-l) 0 var(--size-xxxl);
+  width: 100%;
+}
+
+.primary-content table {
+  line-height: var(--line-height-m);
+}
+
+caption {
+  font-size: var(--font-size-m);
+  font-weight: bold;
+  line-height: var(--line-height-s);
+  margin-bottom: var(--size-m);
+  margin-top: var(--size-s);
+  text-align: left;
+}
+
+thead {
+  border-bottom: var(--border-thick) solid
+    var(--color-table-head-border, darkgrey);
+
+  tr {
+    background: var(--color-table-head-bg, white);
+    color: var(--color-table-head-fg, currentColor);
+  }
+}
+
+// stylelint-disable a11y/media-prefers-reduced-motion
+tbody {
+  tr {
+    background: var(--color-table-row-bg-light, white);
+    color: var(--color-table-row-fg-light, currentColor);
+    transition: background-color 0.3s;
+
+    &:nth-child(odd) {
+      background: var(--color-table-row-bg-dark, whitesmoke);
+      color: var(--color-table-row-fg-dark, currentColor);
+    }
+
+    &:hover,
+    &:focus {
+      background: var(--color-table-row-bg-hover, beige);
+      color: var(--color-table-row-fg-hover, currentColor);
+    }
+  }
+}
+// stylelint-enable a11y/media-prefers-reduced-motion
+
+th,
+td {
+  border: var(--border-thin) solid var(--color-table-border, lightgray);
+  font-size: var(--font-size-s);
+  overflow-wrap: break-word;
+  padding: var(--size-xs) var(--size-l);
+  text-align: center;
+  vertical-align: top;
+
+  a {
+    color: var(--color-link);
+  }
+
+  p {
+    margin: 0;
+
+    + p {
+      margin-top: var(--size-s);
+    }
+  }
+}
+
+th {
+  font-weight: bold;
+  padding: var(--size-s) var(--size-l);
+}

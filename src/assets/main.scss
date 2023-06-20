@@ -1,16 +1,11 @@
+@use 'theme';
+@use 'layout';
+@use 'typography';
+@use 'tables';
 @use 'header';
 @use 'forms';
 @use 'shop';
 @use 'footer';
-
-html {
-  color-scheme: dark light;
-}
-
-body {
-  margin: 1em;
-}
-
-.lowercase {
-  text-transform: lowercase;
-}
+@use 'magic-item';
+@use 'gachapon';
+@use 'inventory';

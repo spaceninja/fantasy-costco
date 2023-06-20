@@ -1,25 +1,40 @@
 <template>
-  <article>
-    <h2>{{ item.name }}, {{ price }}gp</h2>
-    <p>
+  <article class="magic-item">
+    <h3 class="magic-item__title">
+      {{ item.name
+      }}<span v-if="!item.gachapon" class="magic-item__price"
+        >, {{ price }}gp</span
+      >
+    </h3>
+    <p class="magic-item__meta">
       <em>
-        {{ friendlyCategory(item.category)
-        }}<span v-if="item.categoryNotes" class="lowercase">
-          ({{ item.categoryNotes }})</span
+        <span class="magic-item__category"
+          >{{ friendlyCategory(item.category)
+          }}<span
+            v-if="item.categoryNotes"
+            class="magic-item__category-notes lowercase"
+          >
+            ({{ item.categoryNotes }})</span
+          ></span
         >,
-        {{ friendlyRarity(item.rarity) }}
-        <span v-if="item.attunement">
-          (requires attunement<span v-if="item.restrictions" class="lowercase">
+        <span class="magic-item__rarity">
+          {{ friendlyRarity(item.rarity) }}
+        </span>
+        <span v-if="item.attunement" class="magic-item__attunement">
+          (requires attunement<span
+            v-if="item.restrictions"
+            class="magic-item__attunement-notes lowercase"
+          >
             by {{ item.restrictions }}</span
           >)
         </span>
       </em>
     </p>
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="htmlDescription" />
-    <p v-if="item.source">
+    <div class="magic-item__description" v-html="htmlDescription" />
+    <p v-if="item.source" class="magic-item__source">
       <a :href="item.source" target="_blank" rel="noopener noreferrer"
-        >source</a
+        >Source</a
       >
       ({{ isOfficial ? 'official' : 'homebrew' }})
     </p>

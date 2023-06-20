@@ -19,19 +19,12 @@
     <button type="button" @click="saveGachaponItems(currentGachaponItems)">
       Save
     </button>
-    <ItemDetail
-      v-if="currentGachaponItem"
-      :key="currentGachaponItem.id"
-      :item="currentGachaponItem"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-import ItemDetail from '@/components/ItemDetail.vue';
 import {
   currentGachaponItems,
-  currentGachaponItem,
   getRandomGachaponItems,
   saveGachaponItems,
   setCurrentGachaponItem,

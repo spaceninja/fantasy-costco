@@ -1,0 +1,41 @@
+.magic-item__title {
+  color: var(--color-link-item);
+  font-family: var(--font-condensed);
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+
+  &::after {
+    margin-bottom: 0.5em;
+  }
+}
+
+.magic-item__price {
+  color: var(--color-page-fg);
+  font-style: normal;
+  font-weight: normal;
+}
+
+.magic-item__source {
+  font-family: var(--font-condensed);
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  text-align: right;
+}
+
+.magic-item__description {
+  a[href*='dndbeyond.com/spells'] {
+    color: var(--color-link-spell);
+    font-weight: bold;
+  }
+
+  a[href*='dndbeyond.com/magic-item'] {
+    color: var(--color-link-item);
+    font-weight: bold;
+  }
+
+  a[href*='dndbeyond.com/monster'] {
+    color: var(--color-link-monster);
+    font-weight: bold;
+  }
+}

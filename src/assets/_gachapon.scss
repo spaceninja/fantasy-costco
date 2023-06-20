@@ -1,0 +1,17 @@
+.gachapon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-m);
+
+  @media screen and (min-width: 42em) {
+    flex-direction: row;
+  }
+}
+
+.gachapon__list {
+  flex: 0 1 auto;
+}
+
+.gachapon__item-detail {
+  flex: 1;
+}

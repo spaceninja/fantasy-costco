@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Settings</h2>
     <form @submit.prevent="saveSettings(settings)">
       <div class="form__group">
         <label for="item-name">Shop Name</label>
