@@ -3,6 +3,7 @@
     <div class="header-content">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <div class="header__branding">
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <div class="header__branding-logo" v-html="logoSvg" />
         <div class="header__branding-name">
           {{ settings?.shopName || 'Fantasy Costco' }}

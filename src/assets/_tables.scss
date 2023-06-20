@@ -35,6 +35,7 @@ tbody {
   tr {
     background: var(--color-table-row-bg-light, white);
     color: var(--color-table-row-fg-light, currentColor);
+    /* stylelint-disable-next-line plugin/no-low-performance-animation-properties */
     transition: background-color 0.3s;
 
     &:nth-child(odd) {
