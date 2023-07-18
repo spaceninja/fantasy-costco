@@ -1,7 +1,7 @@
 <template>
   <div>
     <button type="button" @click="enterAddItemMode">Add Item</button>
-    <table v-if="allItems.length">
+    <table v-if="allItems.length" class="inventory-list">
       <thead>
         <tr>
           <th>Name</th>

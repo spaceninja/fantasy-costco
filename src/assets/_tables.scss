@@ -21,11 +21,12 @@ caption {
 }
 
 thead {
-  border-bottom: var(--border-thick) solid
-    var(--color-table-head-border, darkgrey);
+  position: sticky;
+  top: 0;
 
   tr {
     background: var(--color-table-head-bg, white);
+    box-shadow: inset 0 -1px 0 0 var(--color-table-border, lightgrey);
     color: var(--color-table-head-fg, currentColor);
   }
 }
@@ -77,4 +78,14 @@ td {
 th {
   font-weight: bold;
   padding: var(--size-s) var(--size-l);
+}
+
+// stylelint-disable-next-line selector-no-qualifying-type
+table.inventory-list {
+  line-height: var(--line-height-s);
+
+  th,
+  td {
+    vertical-align: middle;
+  }
 }
