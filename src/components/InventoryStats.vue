@@ -17,8 +17,8 @@
       Gachapon items:
       <ul>
         <li>{{ gachaponItems.length }} total</li>
-        <li>{{ stockedGachaponItems.length }} stocked</li>
-        <li>{{ unstockedGachaponItems.length }} unstocked</li>
+        <li>{{ stockedGachaponIds.length }} stocked</li>
+        <li>{{ unstockedGachaponIds.length }} unstocked</li>
       </ul>
     </li>
     <li>
@@ -45,8 +45,8 @@ import {
 } from '@/composables/useItem';
 import {
   gachaponItems,
-  unstockedGachaponItems,
-  stockedGachaponItems,
+  unstockedGachaponIds,
+  stockedGachaponIds,
 } from '@/composables/useGachapon';
 import {
   frontRoomItems,

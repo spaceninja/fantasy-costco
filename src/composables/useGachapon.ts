@@ -14,7 +14,7 @@ const database = getDatabase(firebaseApp);
  */
 
 export const isLoadingGachapon = ref(false);
-export const currentGachaponItems = ref<Item[]>([]);
+export const currentGachaponIds = ref<string[]>([]);
 export const currentGachaponItem = ref<Item | null>(null);
 export const unloadGachaponListener = ref(() => {});
 
@@ -26,12 +26,22 @@ export const gachaponItems = computed(() => {
   return unpurchasedItems.value.filter((item) => item.gachapon === true);
 });
 
-export const stockedGachaponItems = computed(() => {
-  return gachaponItems.value.filter((item) => item.stocked === true);
+export const stockedGachaponIds = computed(() => {
+  return gachaponItems.value
+    .filter((item) => item.stocked === true)
+    .map((item) => item.id);
 });
 
-export const unstockedGachaponItems = computed(() => {
-  return gachaponItems.value.filter((item) => item.stocked === false);
+export const unstockedGachaponIds = computed(() => {
+  return gachaponItems.value
+    .filter((item) => item.stocked === false)
+    .map((item) => item.id);
+});
+
+export const currentGachaponItems = computed(() => {
+  return gachaponItems.value.filter((item) =>
+    currentGachaponIds.value.includes(item.id)
+  );
 });
 
 /**
@@ -49,11 +59,11 @@ export const setCurrentGachaponItem = (item: Item) => {
  * items, then filling the rest with random unpurchased gachapon items.
  */
 export const getRandomGachaponItems = () => {
-  const remainingSlots = 20 - stockedGachaponItems.value.length;
-  const shuffledGachaponItems = shuffle(unstockedGachaponItems.value);
-  currentGachaponItems.value = [
+  const remainingSlots = 20 - stockedGachaponIds.value.length;
+  const shuffledGachaponItems = shuffle(unstockedGachaponIds.value);
+  currentGachaponIds.value = [
     ...shuffledGachaponItems.slice(0, remainingSlots),
-    ...stockedGachaponItems.value,
+    ...stockedGachaponIds.value,
   ];
 };
 
@@ -82,7 +92,7 @@ export const loadGachaponItems = async (uid: string) => {
       if (data === null) data = [];
       data = data.isArray ? data : Object.values(data);
       // save the items from database (or an empty array) to app state
-      currentGachaponItems.value = data;
+      currentGachaponIds.value = data;
     });
   } catch (error) {
     console.error(error);
@@ -102,7 +112,7 @@ export const unloadGachaponItems = async () => {
   // remove listener
   unloadGachaponListener.value();
   // reset state
-  currentGachaponItems.value = [];
+  currentGachaponIds.value = [];
   unloadGachaponListener.value = () => {};
 };
 
@@ -113,7 +123,7 @@ export const unloadGachaponItems = async () => {
  *
  * @see https://firebase.google.com/docs/database/web/read-and-write
  */
-export const saveGachaponItems = async (items: Item[]) => {
+export const saveGachaponItems = async (items: string[]) => {
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');

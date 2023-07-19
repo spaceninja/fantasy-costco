@@ -1,8 +1,9 @@
 import { ref } from 'vue';
 import { firebaseApp } from '@/utils/firebase';
 import { getDatabase, ref as dbRef, get } from 'firebase/database';
-import { currentFrontRoomItems } from '@/composables/useFrontRoom';
+import { currentFrontRoomIds } from '@/composables/useFrontRoom';
 import { settings, emptySettings } from '@/composables/useSettings';
+import { loadUserItems } from '@/composables/useItem';
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
@@ -54,6 +55,8 @@ export const loadPublicSettings = async (uid: string) => {
 export const loadPublicFrontRoomItems = async (uid: string) => {
   // Remapping from `cosmic-curiosities` to Scott's store
   if (uid === 'cosmic-curiosities') uid = 'tFvAoymzLaTMdSwSgPTBXgP8ukp1';
+  // Load all the user items to populate the front room
+  loadUserItems(uid);
   try {
     isLoadingPublic.value = true;
     // create a database reference
@@ -65,8 +68,9 @@ export const loadPublicFrontRoomItems = async (uid: string) => {
       // @see https://firebase.googleblog.com/2014/04/best-practices-arrays-in-firebase.html
       if (data === null) data = [];
       data = data.isArray ? data : Object.values(data);
+      console.log('data', data);
       // save the items from database (or an empty array) to app state
-      currentFrontRoomItems.value = data;
+      currentFrontRoomIds.value = data;
     });
   } catch (error) {
     console.error(error);

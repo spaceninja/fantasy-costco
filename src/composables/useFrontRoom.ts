@@ -14,7 +14,7 @@ const database = getDatabase(firebaseApp);
  */
 
 export const isLoadingFrontRoom = ref(false);
-export const currentFrontRoomItems = ref<Item[]>([]);
+export const currentFrontRoomIds = ref<string[]>([]);
 export const unloadFrontRoomListener = ref(() => {});
 
 /**
@@ -31,6 +31,12 @@ export const stockedFrontRoomItems = computed(() => {
 
 export const unstockedFrontRoomItems = computed(() => {
   return frontRoomItems.value.filter((item) => item.stocked === false);
+});
+
+export const currentFrontRoomItems = computed(() => {
+  return frontRoomItems.value.filter((item) =>
+    currentFrontRoomIds.value.includes(item.id)
+  );
 });
 
 /**
@@ -55,9 +61,9 @@ export const getRandomFrontRoomItemsByRarity = (
   );
   const remainingSlots = count - stocked.length;
   const shuffled = shuffle(unstocked);
-  return [...shuffled.slice(0, remainingSlots), ...stocked].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  return [...shuffled.slice(0, remainingSlots), ...stocked]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((item: Item) => item.id);
 };
 
 /**
@@ -67,12 +73,12 @@ export const getRandomFrontRoomItemsByRarity = (
  * items, then filling the rest with random unpurchased front room items.
  */
 export const getRandomFrontRoomItems = () => {
-  const common = getRandomFrontRoomItemsByRarity('common', 6) as Item[];
-  const uncommon = getRandomFrontRoomItemsByRarity('uncommon', 6) as Item[];
-  const rare = getRandomFrontRoomItemsByRarity('rare', 4) as Item[];
-  const veryRare = getRandomFrontRoomItemsByRarity('very-rare', 2) as Item[];
-  const legendary = getRandomFrontRoomItemsByRarity('legendary', 1) as Item[];
-  currentFrontRoomItems.value = [
+  const common = getRandomFrontRoomItemsByRarity('common', 6);
+  const uncommon = getRandomFrontRoomItemsByRarity('uncommon', 6);
+  const rare = getRandomFrontRoomItemsByRarity('rare', 4);
+  const veryRare = getRandomFrontRoomItemsByRarity('very-rare', 2);
+  const legendary = getRandomFrontRoomItemsByRarity('legendary', 1);
+  currentFrontRoomIds.value = [
     ...common,
     ...uncommon,
     ...rare,
@@ -106,7 +112,7 @@ export const loadFrontRoomItems = async (uid: string) => {
       if (data === null) data = [];
       data = data.isArray ? data : Object.values(data);
       // save the items from database (or an empty array) to app state
-      currentFrontRoomItems.value = data;
+      currentFrontRoomIds.value = data;
     });
   } catch (error) {
     console.error(error);
@@ -126,7 +132,7 @@ export const unloadFrontRoomItems = async () => {
   // remove listener
   unloadFrontRoomListener.value();
   // reset state
-  currentFrontRoomItems.value = [];
+  currentFrontRoomIds.value = [];
   unloadFrontRoomListener.value = () => {};
 };
 
@@ -137,7 +143,7 @@ export const unloadFrontRoomItems = async () => {
  *
  * @see https://firebase.google.com/docs/database/web/read-and-write
  */
-export const saveFrontRoomItems = async (items: Item[]) => {
+export const saveFrontRoomItems = async (items: string[]) => {
   try {
     // Check to ensure user is still logged in.
     if (userSession?.value === null) throw new Error('Please log in again');

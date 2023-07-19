@@ -16,7 +16,7 @@
     </ol>
     <p v-else>Sorry, we have nothing in stock!</p>
     <button type="button" @click="getRandomGachaponItems()">Restock</button>
-    <button type="button" @click="saveGachaponItems(currentGachaponItems)">
+    <button type="button" @click="saveGachaponItems(currentGachaponIds)">
       Save
     </button>
   </div>
@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import {
+  currentGachaponIds,
   currentGachaponItems,
   getRandomGachaponItems,
   saveGachaponItems,

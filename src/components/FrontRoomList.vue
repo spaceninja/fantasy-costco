@@ -10,7 +10,7 @@
     <p v-else>Sorry, we have nothing in stock!</p>
     <div v-if="userSession">
       <button type="button" @click="getRandomFrontRoomItems()">Restock</button>
-      <button type="button" @click="saveFrontRoomItems(currentFrontRoomItems)">
+      <button type="button" @click="saveFrontRoomItems(currentFrontRoomIds)">
         Save
       </button>
     </div>
@@ -21,6 +21,7 @@
 import ItemDetail from '@/components/ItemDetail.vue';
 import { userSession } from '@/composables/useAuth';
 import {
+  currentFrontRoomIds,
   currentFrontRoomItems,
   getRandomFrontRoomItems,
   saveFrontRoomItems,
