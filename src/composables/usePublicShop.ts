@@ -55,8 +55,6 @@ export const loadPublicSettings = async (uid: string) => {
 export const loadPublicFrontRoomItems = async (uid: string) => {
   // Remapping from `cosmic-curiosities` to Scott's store
   if (uid === 'cosmic-curiosities') uid = 'tFvAoymzLaTMdSwSgPTBXgP8ukp1';
-  // Load all the user items to populate the front room
-  loadUserItems(uid);
   try {
     isLoadingPublic.value = true;
     // create a database reference
@@ -68,7 +66,6 @@ export const loadPublicFrontRoomItems = async (uid: string) => {
       // @see https://firebase.googleblog.com/2014/04/best-practices-arrays-in-firebase.html
       if (data === null) data = [];
       data = data.isArray ? data : Object.values(data);
-      console.log('data', data);
       // save the items from database (or an empty array) to app state
       currentFrontRoomIds.value = data;
     });
@@ -76,5 +73,6 @@ export const loadPublicFrontRoomItems = async (uid: string) => {
     console.error(error);
   } finally {
     isLoadingPublic.value = false;
+    loadUserItems(uid);
   }
 };

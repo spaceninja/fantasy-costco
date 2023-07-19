@@ -15,13 +15,6 @@
   font-weight: normal;
 }
 
-.magic-item__source {
-  font-family: var(--font-condensed);
-  font-size: var(--font-size-xs);
-  font-style: italic;
-  text-align: right;
-}
-
 .magic-item__description {
   a[href*='dndbeyond.com/spells'] {
     color: var(--color-link-spell);
@@ -37,4 +30,23 @@
     color: var(--color-link-monster);
     font-weight: bold;
   }
+}
+
+.magic-item__extras {
+  display: flex;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.magic-item__source {
+  font-family: var(--font-condensed);
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  margin-left: auto;
+}
+
+.magic-item__purchase {
+  display: block;
 }

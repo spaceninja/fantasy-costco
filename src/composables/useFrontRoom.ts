@@ -4,7 +4,7 @@ import { firebaseApp } from '@/utils/firebase';
 import { getDatabase, ref as dbRef, set, onValue } from 'firebase/database';
 import { userSession } from './useAuth';
 import { type Item } from '@/types/Item';
-import { unpurchasedItems } from '@/composables/useItem';
+import { allItems, unpurchasedItems } from '@/composables/useItem';
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
@@ -21,6 +21,10 @@ export const unloadFrontRoomListener = ref(() => {});
  * COMPUTED REFERENCES ---------------------------------------------------------
  */
 
+export const allFrontRoomItems = computed(() => {
+  return allItems.value.filter((item) => item.gachapon === false);
+});
+
 export const frontRoomItems = computed(() => {
   return unpurchasedItems.value.filter((item) => item.gachapon === false);
 });
@@ -34,7 +38,7 @@ export const unstockedFrontRoomItems = computed(() => {
 });
 
 export const currentFrontRoomItems = computed(() => {
-  return frontRoomItems.value.filter((item) =>
+  return allFrontRoomItems.value.filter((item) =>
     currentFrontRoomIds.value.includes(item.id)
   );
 });

@@ -4,7 +4,7 @@ import { firebaseApp } from '@/utils/firebase';
 import { getDatabase, ref as dbRef, set, onValue } from 'firebase/database';
 import { userSession } from './useAuth';
 import { type Item } from '@/types/Item';
-import { unpurchasedItems } from '@/composables/useItem';
+import { allItems, unpurchasedItems } from '@/composables/useItem';
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
@@ -15,12 +15,16 @@ const database = getDatabase(firebaseApp);
 
 export const isLoadingGachapon = ref(false);
 export const currentGachaponIds = ref<string[]>([]);
-export const currentGachaponItem = ref<Item | null>(null);
+export const currentGachaponId = ref<string | null>(null);
 export const unloadGachaponListener = ref(() => {});
 
 /**
  * COMPUTED REFERENCES ---------------------------------------------------------
  */
+
+export const allGachaponItems = computed(() => {
+  return allItems.value.filter((item) => item.gachapon === true);
+});
 
 export const gachaponItems = computed(() => {
   return unpurchasedItems.value.filter((item) => item.gachapon === true);
@@ -39,8 +43,14 @@ export const unstockedGachaponIds = computed(() => {
 });
 
 export const currentGachaponItems = computed(() => {
-  return gachaponItems.value.filter((item) =>
+  return allGachaponItems.value.filter((item) =>
     currentGachaponIds.value.includes(item.id)
+  );
+});
+
+export const currentGachaponItem = computed(() => {
+  return allGachaponItems.value.find(
+    (item) => item.id === currentGachaponId.value
   );
 });
 
@@ -49,7 +59,7 @@ export const currentGachaponItems = computed(() => {
  */
 
 export const setCurrentGachaponItem = (item: Item) => {
-  currentGachaponItem.value = item;
+  currentGachaponId.value = item.id;
 };
 
 /**

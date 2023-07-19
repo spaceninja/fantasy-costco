@@ -256,6 +256,28 @@ export const editItem = async (item: Item) => {
 };
 
 /**
+ * Purchase Item
+ *
+ * Toggles the purchased state of an item
+ */
+export const purchaseItem = async (item: Item) => {
+  try {
+    // Check to ensure user is still logged in.
+    if (userSession?.value === null) throw new Error('Please log in again');
+    // create a database reference
+    const newItemRef = dbRef(
+      database,
+      `stores/${userSession.value.uid}/items/${item.id}`
+    );
+    // save to database
+    await set(newItemRef, { ...item, purchased: !item.purchased });
+    exitEditMode();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
  * Delete Item
  *
  * Deletes an item via its id

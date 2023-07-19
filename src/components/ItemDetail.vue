@@ -32,22 +32,31 @@
     </p>
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div class="magic-item__description" v-html="htmlDescription" />
-    <p v-if="item.source" class="magic-item__source">
-      <a :href="item.source" target="_blank" rel="noopener noreferrer"
-        >Source</a
-      >
-      ({{ isOfficial ? 'official' : 'homebrew' }})
-    </p>
+    <div class="magic-item__extras">
+      <p v-if="userSession" class="magic-item__actions">
+        <button class="magic-item__purchase" @click="purchaseItem(item)">
+          {{ item.purchased ? '✔︎ Purchased' : 'Purchase' }}
+        </button>
+      </p>
+      <p v-if="item.source" class="magic-item__source">
+        <a :href="item.source" target="_blank" rel="noopener noreferrer"
+          >Source</a
+        >
+        ({{ isOfficial ? 'official' : 'homebrew' }})
+      </p>
+    </div>
   </article>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { marked } from 'marked';
+import { userSession } from '@/composables/useAuth';
 import {
   friendlyCategory,
   friendlyRarity,
   getPriceByRarity,
+  purchaseItem,
 } from '@/composables/useItem';
 import { type Item } from '@/types/Item';
 
