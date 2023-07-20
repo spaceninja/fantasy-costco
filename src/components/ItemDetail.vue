@@ -68,7 +68,7 @@ const htmlDescription = computed(() =>
   marked(props.item.description, {
     headerIds: false,
     mangle: false,
-  })
+  }),
 );
 
 const isOfficial = computed(() => props.item.source?.includes('dndbeyond.com'));

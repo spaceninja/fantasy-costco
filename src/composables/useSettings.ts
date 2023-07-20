@@ -75,7 +75,7 @@ export const saveSettings = async (settings: Settings) => {
     // create a database reference
     const settingsRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/settings`
+      `stores/${userSession.value.uid}/settings`,
     );
     // save to database
     await set(settingsRef, settings);
