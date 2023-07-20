@@ -39,7 +39,7 @@ export const unstockedFrontRoomItems = computed(() => {
 
 export const currentFrontRoomItems = computed(() => {
   return allFrontRoomItems.value.filter((item) =>
-    currentFrontRoomIds.value.includes(item.id)
+    currentFrontRoomIds.value.includes(item.id),
   );
 });
 
@@ -55,13 +55,13 @@ export const currentFrontRoomItems = computed(() => {
  */
 export const getRandomFrontRoomItemsByRarity = (
   rarity: string,
-  count: number
+  count: number,
 ) => {
   const stocked = stockedFrontRoomItems.value.filter(
-    (item) => item.rarity === rarity
+    (item) => item.rarity === rarity,
   );
   const unstocked = unstockedFrontRoomItems.value.filter(
-    (item) => item.rarity === rarity
+    (item) => item.rarity === rarity,
   );
   const remainingSlots = count - stocked.length;
   const shuffled = shuffle(unstocked);
@@ -154,7 +154,7 @@ export const saveFrontRoomItems = async (items: string[]) => {
     // create a database reference
     const frontRoomRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/frontroom`
+      `stores/${userSession.value.uid}/frontroom`,
     );
     // save to database
     await set(frontRoomRef, items);

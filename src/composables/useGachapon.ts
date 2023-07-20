@@ -44,13 +44,13 @@ export const unstockedGachaponIds = computed(() => {
 
 export const currentGachaponItems = computed(() => {
   return allGachaponItems.value.filter((item) =>
-    currentGachaponIds.value.includes(item.id)
+    currentGachaponIds.value.includes(item.id),
   );
 });
 
 export const currentGachaponItem = computed(() => {
   return allGachaponItems.value.find(
-    (item) => item.id === currentGachaponId.value
+    (item) => item.id === currentGachaponId.value,
   );
 });
 
@@ -140,7 +140,7 @@ export const saveGachaponItems = async (items: string[]) => {
     // create a database reference
     const gachaponRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/gachapon`
+      `stores/${userSession.value.uid}/gachapon`,
     );
     // save to database
     await set(gachaponRef, items);

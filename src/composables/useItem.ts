@@ -217,7 +217,7 @@ export const addItem = async (item: Item) => {
     // create a database reference
     const itemListRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/items`
+      `stores/${userSession.value.uid}/items`,
     );
     // push a new item to the database
     const newItemRef = push(itemListRef);
@@ -245,7 +245,7 @@ export const editItem = async (item: Item) => {
     // create a database reference
     const newItemRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/items/${item.id}`
+      `stores/${userSession.value.uid}/items/${item.id}`,
     );
     // save to database
     await set(newItemRef, item);
@@ -267,7 +267,7 @@ export const purchaseItem = async (item: Item) => {
     // create a database reference
     const newItemRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/items/${item.id}`
+      `stores/${userSession.value.uid}/items/${item.id}`,
     );
     // save to database
     await set(newItemRef, { ...item, purchased: !item.purchased });
@@ -291,7 +291,7 @@ export const deleteItem = async (deletedItemId: string) => {
     // create a database reference
     const itemRef = dbRef(
       database,
-      `stores/${userSession.value.uid}/items/${deletedItemId}`
+      `stores/${userSession.value.uid}/items/${deletedItemId}`,
     );
     // save to database
     await set(itemRef, null);
