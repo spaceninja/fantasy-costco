@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { type Item } from '@/types/Item';
 import { editItem, deleteItem, enterEditItemMode } from '@/composables/useItem';
 
@@ -49,9 +49,9 @@ const showConfirm = () => {
   }
 };
 
-const isGachapon = ref(props.item.gachapon);
-const isStocked = ref(props.item.stocked);
-const isPurchased = ref(props.item.purchased);
+const isGachapon = computed(() => props.item.gachapon);
+const isStocked = computed(() => props.item.stocked);
+const isPurchased = computed(() => props.item.purchased);
 
 const onGachaponChange = () => {
   const updatedItem = {

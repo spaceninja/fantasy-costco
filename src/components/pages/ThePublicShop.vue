@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import TheFrontRoom from '@/components/pages/TheFrontRoom.vue';
 import {
   loadPublicSettings,
@@ -14,6 +15,8 @@ const props = defineProps<{
 }>();
 
 // Load the public settings and front room items for the store ID provided in the URL
-loadPublicSettings(props.storeId);
-loadPublicFrontRoomItems(props.storeId);
+onMounted(() => {
+  loadPublicSettings(props.storeId);
+  loadPublicFrontRoomItems(props.storeId);
+});
 </script>
