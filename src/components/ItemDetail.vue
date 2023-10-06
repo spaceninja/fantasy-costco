@@ -64,9 +64,7 @@ const props = defineProps<{
   item: Item;
 }>();
 
-const htmlDescription = computed(() =>
-  marked(props.item.description),
-);
+const htmlDescription = computed(() => marked(props.item.description));
 
 const isOfficial = computed(() => props.item.source?.includes('dndbeyond.com'));
 
