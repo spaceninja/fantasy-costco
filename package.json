@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "firebase": "10.4.0",
-    "marked": "9.1.0",
+    "marked": "9.1.1",
     "vue": "3.3.4"
   },
   "devDependencies": {
