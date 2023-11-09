@@ -20,7 +20,7 @@
     "type": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "firebase": "10.5.2",
+    "firebase": "10.6.0",
     "marked": "9.1.5",
     "vue": "3.3.8"
   },
