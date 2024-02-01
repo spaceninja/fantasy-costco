@@ -35,7 +35,7 @@
     "@vue/tsconfig": "0.5.1",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-vue": "9.21.0",
+    "eslint-plugin-vue": "9.21.1",
     "npm-run-all2": "5.0.0",
     "postcss-html": "1.6.0",
     "prettier": "3.2.2",
