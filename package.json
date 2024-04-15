@@ -22,7 +22,7 @@
   "dependencies": {
     "firebase": "10.11.0",
     "marked": "12.0.1",
-    "vue": "3.4.21"
+    "vue": "3.4.22"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.10.2",
