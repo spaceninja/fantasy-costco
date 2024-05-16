@@ -45,6 +45,6 @@
     "stylelint-config-spaceninja": "15.0.0",
     "typescript": "5.4.5",
     "vite": "5.2.11",
-    "vue-tsc": "2.0.18"
+    "vue-tsc": "2.0.19"
   }
 }
