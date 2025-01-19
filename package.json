@@ -30,7 +30,7 @@
     "@types/marked": "5.0.2",
     "@types/node": "20.17.8",
     "@vitejs/plugin-vue": "5.2.0",
-    "@vue/eslint-config-prettier": "9.0.0",
+    "@vue/eslint-config-prettier": "10.2.0",
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/tsconfig": "0.6.0",
     "eslint": "8.57.1",
