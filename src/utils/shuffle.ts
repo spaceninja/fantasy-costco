@@ -3,6 +3,7 @@
  *
  * @see https://javascript.info/task/shuffle
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const shuffle = (array: any[]) => {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
