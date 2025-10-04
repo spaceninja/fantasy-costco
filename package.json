@@ -44,7 +44,7 @@
     "stylelint": "16.24.0",
     "stylelint-config-recommended-vue": "1.6.1",
     "stylelint-config-spaceninja": "15.0.0",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "vite": "6.3.6",
     "vue-eslint-parser": "10.2.0",
     "vue-tsc": "2.2.12"
