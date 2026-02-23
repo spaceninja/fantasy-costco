@@ -25,7 +25,7 @@
     "vue": "3.5.28"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "1.16.0",
+    "@rushstack/eslint-patch": "1.16.1",
     "@tsconfig/node24": "24.0.4",
     "@types/marked": "6.0.0",
     "@types/node": "24.10.13",
