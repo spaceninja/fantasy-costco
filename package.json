@@ -27,7 +27,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@rushstack/eslint-patch": "1.16.1",
-    "@tsconfig/node24": "24.0.4",
+    "@tsconfig/node24": "24.0.5",
     "@types/marked": "6.0.0",
     "@types/node": "24.13.3",
     "@vitejs/plugin-vue": "6.0.8",
